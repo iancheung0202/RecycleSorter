@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
+    <link href="recycle-icon.png" rel="icon">
     <meta name="viewport" content="width=device-width">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <title>RecycleSorter</title>
@@ -58,6 +58,9 @@
         #startSorting {
             opacity: 1;
             animation: fade 2s linear;
+            display: table;
+            margin-left: auto;
+            margin-right: auto;
         }
         @keyframes fade {
             0%, 50%{ opacity: 0 }
@@ -115,11 +118,11 @@
         </div>
     </div>
     <div id="startScreen">
-        <div id="title"><h1>RecycleSorter</h1></div>
+        <div id="title"><h1><img src="recycle-icon.png" style="height: min(10vw, 100px);margin-left: 15%;margin-top: 55px;">&nbsp;<span style="font-size: min(6.5vw, 37px);">GunnHacks 9.0</span><br>RecycleSorter</h1></div>
         <span class="btn" onclick="init('environment')" id="startSorting">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-            </svg> Start Sorting</span>
+            </svg> &nbsp;Start Sorting</span>
     </div>
     <div id="sortScreen" style="visibility: hidden; display: none;">
         <div id="webcam-container"></div>
