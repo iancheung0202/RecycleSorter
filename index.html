@@ -131,7 +131,6 @@
             text-decoration: none;
             font-size: 17px;
         }
-
         .topnav a:hover {
             background-color: #ddd;
             color: black;
@@ -150,7 +149,6 @@
                 display: block;
             }
         }
-
         @media screen and (max-width: 600px) {
             .topnav.responsive {position: relative;}
             .topnav.responsive .icon {
@@ -164,6 +162,57 @@
                 text-align: left;
             }
         }
+        .new_footer_top {
+            padding: 60px 0px 160px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .new_footer_area {
+            padding-top: 5px;
+            padding-bottom: 50px;
+            margin-top: 80vh;
+        }
+        .new_footer_top .footer_bg {
+            position: absolute;
+            bottom: 0;
+            background: url("./footer_bg.png") no-repeat scroll center 0;
+            width: 100%;
+            height: 266px;
+        }
+        .new_footer_top .footer_bg .footer_bg_one {
+            background: url("./volks.gif") no-repeat center center;
+            width: 330px;
+            height: 105px;
+            background-size:100%;
+            position: absolute;
+            bottom: 0;
+            left: 30%;
+            -webkit-animation: myfirst 22s linear infinite;
+            animation: myfirst 22s linear infinite;
+        }
+        .new_footer_top .footer_bg .footer_bg_two {
+            background: url("./cyclist.gif") no-repeat center center;
+            width: 88px;
+            height: 100px;
+            background-size:100%;
+            bottom: 0;
+            left: 38%;
+            position: absolute;
+            -webkit-animation: myfirst 30s linear infinite;
+            animation: myfirst 30s linear infinite;
+        }
+        @-moz-keyframes myfirst {
+            0% {left: -25%;}
+            100% {left: 100%;}
+        }
+        @-webkit-keyframes myfirst {
+            0% {left: -25%;}
+            100% {left: 100%;}
+        }
+        @keyframes myfirst {
+            0% {left: -25%;}
+            100% {left: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -176,9 +225,7 @@
             <i class="fa fa-bars"></i>
         </a>
     </div>
-
     <main>
-    
         <div class="modal">
             <div class="modal-content">
                 <span class="close-button">&times;</span>
@@ -198,7 +245,16 @@
             <div id="label-container"></div>
         </div>
     </main>
-
+    <footer class="new_footer_area" width="100%">
+        <div class="new_footer_top">
+            <div class="container">
+            </div>
+            <div class="footer_bg">
+                <div class="footer_bg_one"></div>
+                <div class="footer_bg_two"></div>
+            </div>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
     <script type="text/javascript">
