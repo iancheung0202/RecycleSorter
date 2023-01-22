@@ -15,9 +15,9 @@ RecycleSorter is a web application that utilizes real-time camera footage to aut
 
 ## How we built it
 
-This web application is built using HTML, CSS and JavaScript. We trained our material classification algorithms using Google Teachable Machine. A webcam is implemented into the website, which will take live snapshots of the materials in question. {TBC}
+This web application is built using HTML, CSS and JavaScript. We trained our material classification algorithms using Google Teachable Machine. A webcam is implemented into the website, which will take live snapshots of the materials in question. The IDE for this application is Visual Studio Code and the application is uploaded to Github Pages for demo.
 
-In addition, we have built an extension Discord bot of this web application using Python, which means that users can directly upload the photos on Discord, a real-time web chat platform, to obtain the classification of the item in the photo. {TBC}
+In addition, we have built an extension Discord bot of this web application using Python, which means that users can directly upload the photos on Discord, a real-time web chat platform, to obtain the classification of the item in the photo. We built this bot using Replit and is hosted 24/7.
 
 ## Challenges we ran into
 
