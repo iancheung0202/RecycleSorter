@@ -15,7 +15,7 @@ RecycleSorter is a web application that utilizes real-time camera footage to aut
 
 ## How we built it
 
-This web application is built using HTML, CSS and JavaScript. We trained our material classification algorithms using Google Teachable Machine. A webcam is implemented into the website, which will take live snapshots of the materials in question. The IDE for this application is Visual Studio Code and the application is uploaded to Github Pages for demo.
+This web application is built using HTML, CSS and JavaScript. We trained our material classification algorithms using Google Teachable Machine. A webcam is implemented into the website, which will take live snapshots of the materials in question. The web application is also designed with sufficient accessibility, meaning it is mobile-friendly. The IDE for this application is Visual Studio Code and the application is uploaded to Github Pages for demo.
 
 In addition, we have built an extension Discord bot of this web application using Python, which means that users can directly upload the photos on Discord, a real-time web chat platform, to obtain the classification of the item in the photo. We built this bot using Replit and is hosted 24/7.
 
@@ -27,7 +27,7 @@ In addition, we ran into countless errors while working on this project, ranging
 
 ## Accomplishments that we're proud of and what we learned
 
-We are very proud of completing our first ever image classification project from scratch. This 24-hour time period has been a challenging and rewarding journey, as we had to undertake a variety of tasks, such as developing an algorithm to detect patterns in images, training a machine learning model on a large dataset, and optimizing the model for accuracy. We also had to learn about different syntaxes and techniques for such image classification. Additionally, we had to develop an interface to allow users to be able to receive predictions from the model in real time using a live webcam. This has been a monumental accomplishment, and we are proud to have achieved such a feat.
+We are very proud of completing our first ever image classification project from scratch. This 24-hour time period has been a challenging and rewarding journey, as we had to undertake a variety of tasks, such as developing an algorithm to detect items in images, training a machine learning model on a large dataset, and optimizing the model for accuracy. We also had to learn about different syntaxes and techniques for such image classification. Additionally, we had to develop an interface to allow users to be able to receive predictions from the model in real time using a live webcam. This has been a monumental accomplishment, and we are proud to have achieved such a feat.
 
 ## What's next for RecycleSorter
 
