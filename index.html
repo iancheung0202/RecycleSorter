@@ -206,6 +206,7 @@
             
             toggleModal();
             var canvases = document.getElementsByTagName('canvas');
+            const dataURL = canvases[0].toDataURL();
             closeButton.addEventListener("click", toggleModal);
             if (prediction[index].className == "Plastic") {
                 document.getElementById("modal-content").innerHTML = `<img src="${dataURL}" width="100%"> <br><br><b>Category:</b> <span style="color: blue;">${prediction[index].className}</span> <br><b>Confidence Level:</b> ${prediction[index].probability.toFixed(2)*100}%<br><br>
