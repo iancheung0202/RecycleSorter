@@ -1,0 +1,6 @@
+0 Plastic
+1 Metals
+2 Glass
+3 Paper
+4 Batteries
+5 Unrecyclable
