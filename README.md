@@ -1,5 +1,5 @@
 # RecycleSorter
-RecycleSorter is a web application that automatically sorts materials based on real-time camera footage and determines the category of that material and if it is recyclable.
+RecycleSorter is a web application that automatically sorts materials based on real-time camera footage and determines if that material is recyclable. It also comes with a Discord bot extension, ReCyclists, that serves the same purpose but with images being passed to the algorithm instead of real-time camera snapshots.
 
 ## Demo
 Head over to the [demo](https://iancheung0202.github.io/RecycleSorter/) to try it out (A mobile device is recommended, though Desktop is also supported).<br>
