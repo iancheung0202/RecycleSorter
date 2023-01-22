@@ -63,13 +63,61 @@
             0%, 50%{ opacity: 0 }
             100% { opacity: 1 }
         }
-        i {
-            font-family: Arial, Helvetica, sans-serif !important;
+        .modal {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(1.1);
+            transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 1rem 1.5rem;
+            width: 24rem;
+            border-radius: 0.5rem;
+            color: black;
+        }
+
+        .close-button {
+            float: right;
+            width: 1.5rem;
+            line-height: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 0.25rem;
+            background-color: lightgray;
+        }
+
+        .close-button:hover {
+            background-color: darkgray;
+        }
+
+        .show-modal {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1.0);
+            transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
         }
     </style>
 </head>
 
 <body>
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div id="modal-content" style="font-family: Arial, Helvetica, sans-serif;"></div>
+        </div>
+    </div>
     <div id="startScreen">
         <div id="title"><h1 data-aos="fade-left">RecycleSorter</h1></div>
         <span class="btn" onclick="init('environment')" id="startSorting">
@@ -87,7 +135,10 @@
     <script type="text/javascript">
         startScreen = document.getElementById("startScreen");
         sortScreen = document.getElementById("sortScreen");
-        
+        const modal = document.querySelector(".modal");
+        // const trigger = document.querySelector(".trigger");
+        const closeButton = document.querySelector(".close-button");
+
         const URL = "https://teachablemachine.withgoogle.com/models/CgTV5zJeZ/";
 
         let model, webcam, labelContainer, maxPredictions;
@@ -138,10 +189,10 @@
             document.getElementById("webcam-container").innerHTML = ""
             document.getElementById("webcam-container").appendChild(webcam.canvas);
             document.getElementById("sortBtn").innerHTML = `<span class="btn" id="sortBtn" onclick="predict()"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-display" viewBox="0 0 16 16"> <path d="M0 4s0-2 2-2h12s2 0 2 2v6s0 2-2 2h-4c0 .667.083 1.167.25 1.5H11a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1h.75c.167-.333.25-.833.25-1.5H2s-2 0-2-2V4zm1.398-.855a.758.758 0 0 0-.254.302A1.46 1.46 0 0 0 1 4.01V10c0 .325.078.502.145.602.07.105.17.188.302.254a1.464 1.464 0 0 0 .538.143L2.01 11H14c.325 0 .502-.078.602-.145a.758.758 0 0 0 .254-.302 1.464 1.464 0 0 0 .143-.538L15 9.99V4c0-.325-.078-.502-.145-.602a.757.757 0 0 0-.302-.254A1.46 1.46 0 0 0 13.99 3H2c-.325 0-.502.078-.602.145z"/> </svg> Sort</span>&nbsp;&nbsp;&nbsp;<span class="btn" id="flipCamera" onclick="init('${next}')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-fill" viewBox="0 0 16 16"> <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/> <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/> </svg> Flip Camera</span>`
-            labelContainer = document.getElementById("label-container");
-            for (let i = 0; i < maxPredictions; i++) { // and class labels
-                labelContainer.appendChild(document.createElement("div"));
-            }
+            // labelContainer = document.getElementById("label-container");
+            // for (let i = 0; i < maxPredictions; i++) { // and class labels
+            //     labelContainer.appendChild(document.createElement("div"));
+            // }
         }
 
         async function loop() {
@@ -160,7 +211,26 @@
             }
             largestProbability = Math.max.apply(Math, probabilities)
             const index = probabilities.indexOf(largestProbability);
-            labelContainer.innerHTML = prediction[index].className + ": " + prediction[index].probability.toFixed(2)*100 + "%";;
+            
+            toggleModal();
+            closeButton.addEventListener("click", toggleModal);
+            if (prediction[index].className == "Plastic") {
+                document.getElementById("modal-content").innerHTML = `<b>Category:</b> <span style="color: blue;">${prediction[index].className}</span> <br><b>Confidence Level:</b> ${prediction[index].probability.toFixed(2)*100}%<br><br>
+Recycling plastic is a great way to help the environment and reduce your environmental footprint. One tip to keep in mind when recycling plastic is to make sure all of your plastics are properly sorted and separated by type before being recycled. Different types of plastic require different recycling processes, so make sure to separate items like plastic bottles from plastic bags, containers, and other types of packaging.<br><br>Additionally, it's important to make sure that any plastic items you plan to recycle are clean and dry. This helps to ensure that the plastic can be recycled properly and won't contaminate other items. Furthermore, make sure to check with your local recycling program to find out which types of plastic are accepted for recycling. By following these tips, you can help to ensure that the plastic items you recycle are properly sorted and recycled. `;
+            } else if (prediction[index].className == "Metals") {
+                document.getElementById("modal-content").innerHTML = `<b>Category:</b> <span style="color: brown;">${prediction[index].className}</span> <br><b>Confidence Level:</b> ${prediction[index].probability.toFixed(2)*100}%<br><br>Recycling metals is an important part of reducing our environmental impact. Make sure to sort the metals you have into their specific categories. For example, separate aluminum cans from steel cans. This makes it easier to recycle the metals separately, which will ensure they are recycled properly. Additionally, make sure to clean off any food residue from the metals so it will be easier to be recycled. <br><br>Additionally, make sure to check with your local recycling center to see what types of metals they accept. Some centers may not accept certain metals, so it’s important to know beforehand. You can also look into donating any unwanted metal items to a scrap yard. Many scrap yards accept a variety of metals, so you can put those items to good use instead of throwing them away. Also, make sure to properly dispose of any hazardous metals such as lead or mercury. These metals can be harmful to the environment and should never be put in the recycling bin. `;
+            } else if (prediction[index].className == "Glass") {
+                document.getElementById("modal-content").innerHTML = `<b>Category:</b> <span style="color: skyblue;">${prediction[index].className}</span> <br><b>Confidence Level:</b> ${prediction[index].probability.toFixed(2)*100}%<br><br> When recycling glass, it is important to rinse it out before putting it in the recycling bin. This will prevent contamination of other materials in the recycling bin and will ensure that the glass can be recycled properly. Furthermore, it is important to remove any lids, caps or labels from the glass before recycling. This will help speed up the process of sorting and recycling the glass.`;
+            } else if (prediction[index].className == "Paper") {
+                document.getElementById("modal-content").innerHTML = `<b>Category:</b> <span style="color: purple;">${prediction[index].className}</span> <br><b>Confidence Level:</b> ${prediction[index].probability.toFixed(2)*100}%<br><br>When it comes to recycling paper, it is important to avoid recycling paper with food, liquids, or other contaminants on the paper as these can contaminate the recycling process. Additionally, make sure to remove staples, paperclips, and other non-paper items. You should also always break down larger pieces of paper, such as cardboard boxes, before recycling them. Breaking down these items helps to ensure that they can be recycled more effectively. `;
+            } else if (prediction[index].className == "Battery") {
+                document.getElementById("modal-content").innerHTML = `<b>Category:</b> <span style="color: green;">${prediction[index].className}</span> <br><b>Confidence Level:</b> ${prediction[index].probability.toFixed(2)*100}%<br><br>When recycling batteries, it is important to remember to use the designated recycling bins for them. Different types of batteries require different methods of disposal and recycling. For example, regular alkaline batteries are considered non-toxic and can be thrown away with regular household waste, while rechargeable batteries contain hazardous materials that require special disposal. To ensure proper disposal, take the batteries to your local recycling center or visit the website of the battery manufacturer for more information on how to properly recycle them.`;
+            } else if (prediction[index].className == "Unrecyclable") {
+                document.getElementById("modal-content").innerHTML = `<b>Category:</b> <span style="color: red;">${prediction[index].className}</span> <br><b>Confidence Level:</b> ${prediction[index].probability.toFixed(2)*100}%<br><br>When it comes to items that cannot be recycled, the best thing to do is to try and find a way to reuse them. For example, if you have an old plastic bottle, you can cut the top off and use it as a planter for small plants. Other items like old clothes can be donated or repurposed into something else, such as a new quilt or bag. If the item is still usable, consider donating it to a charity or local thrift store. If the item is no longer usable, it should be disposed of responsibly and taken to a local landfill or waste management facility.`;
+            }
+        }
+        function toggleModal() {
+            modal.classList.toggle("show-modal");
         }
     </script>
 </body>
