@@ -26,11 +26,11 @@
             color: black;
         }
 		#title {
-            font-size: 50px;
+            font-size: min(8vw, 50px);
         }
         .btn {
             justify-content: center;
-            font-size: 30px;
+            font-size: min(5vw, 20px);
             border: 1px solid white;
             padding: 10px;
             border-radius: 5px;
@@ -75,7 +75,6 @@
             transform: scale(1.1);
             transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
         }
-
         .modal-content {
             position: absolute;
             top: 50%;
@@ -87,7 +86,6 @@
             border-radius: 0.5rem;
             color: black;
         }
-
         .close-button {
             float: right;
             width: 1.5rem;
@@ -97,11 +95,9 @@
             border-radius: 0.25rem;
             background-color: lightgray;
         }
-
         .close-button:hover {
             background-color: darkgray;
         }
-
         .show-modal {
             opacity: 1;
             visibility: visible;
@@ -119,7 +115,7 @@
         </div>
     </div>
     <div id="startScreen">
-        <div id="title"><h1 data-aos="fade-left">RecycleSorter</h1></div>
+        <div id="title"><h1>RecycleSorter</h1></div>
         <span class="btn" onclick="init('environment')" id="startSorting">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -189,10 +185,6 @@
             document.getElementById("webcam-container").innerHTML = ""
             document.getElementById("webcam-container").appendChild(webcam.canvas);
             document.getElementById("sortBtn").innerHTML = `<span class="btn" id="sortBtn" onclick="predict()"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-display" viewBox="0 0 16 16"> <path d="M0 4s0-2 2-2h12s2 0 2 2v6s0 2-2 2h-4c0 .667.083 1.167.25 1.5H11a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1h.75c.167-.333.25-.833.25-1.5H2s-2 0-2-2V4zm1.398-.855a.758.758 0 0 0-.254.302A1.46 1.46 0 0 0 1 4.01V10c0 .325.078.502.145.602.07.105.17.188.302.254a1.464 1.464 0 0 0 .538.143L2.01 11H14c.325 0 .502-.078.602-.145a.758.758 0 0 0 .254-.302 1.464 1.464 0 0 0 .143-.538L15 9.99V4c0-.325-.078-.502-.145-.602a.757.757 0 0 0-.302-.254A1.46 1.46 0 0 0 13.99 3H2c-.325 0-.502.078-.602.145z"/> </svg> Sort</span>&nbsp;&nbsp;&nbsp;<span class="btn" id="flipCamera" onclick="init('${next}')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-fill" viewBox="0 0 16 16"> <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/> <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/> </svg> Flip Camera</span>`
-            // labelContainer = document.getElementById("label-container");
-            // for (let i = 0; i < maxPredictions; i++) { // and class labels
-            //     labelContainer.appendChild(document.createElement("div"));
-            // }
         }
 
         async function loop() {
@@ -214,8 +206,6 @@
             
             toggleModal();
             var canvases = document.getElementsByTagName('canvas');
-            const dataURL = canvases[0].toDataURL();
-console.log(dataURL);
             closeButton.addEventListener("click", toggleModal);
             if (prediction[index].className == "Plastic") {
                 document.getElementById("modal-content").innerHTML = `<img src="${dataURL}" width="100%"> <br><br><b>Category:</b> <span style="color: blue;">${prediction[index].className}</span> <br><b>Confidence Level:</b> ${prediction[index].probability.toFixed(2)*100}%<br><br>
